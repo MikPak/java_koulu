@@ -23,7 +23,7 @@ public class Tehtava9 {
             luku = scanner.nextInt(); // Luetaan syöte
             summa += luku; // Summataan pisteet
             
-            // Luetaan ensimmäinen luku pienimmäksi luvuksi myöhempää vertailua varten
+            // Luetaan ensimmäinen luku pienimmän luvun vertailukohdaksi
             if(j < 1) {
                 pienin = luku;
             }

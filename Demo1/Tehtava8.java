@@ -25,8 +25,9 @@ public class Tehtava8 {
             j++;
         } while(j < 5);
         
-        for(int i = taulukko.length -1; i >= 0; i--) { // Tulostetaan taulukon arvot käänteisessä järjestyksessä
-            System.out.println(taulukko[i]);
+        // Tulostetaan taulukon arvot käänteisessä järjestyksessä
+        for(int i = taulukko.length -1; i >= 0; i--) { 
+            System.out.println(taulukko[4]);
         }
     }
 }

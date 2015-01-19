@@ -23,6 +23,7 @@ import java.util.Scanner;
 
 public class Tehtava10 {
     
+    // Aliohjelma tähtien tulostamiselle
     private static void tulostaTahdet(int maara) {
         for(int i = 0; i < maara; i++) {
             System.out.print("*");
