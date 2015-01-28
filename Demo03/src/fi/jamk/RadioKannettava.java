@@ -16,12 +16,12 @@ package fi.jamk;
 
 public class RadioKannettava extends Radio {
     
-    public RadioKannettava(int toiminta, int aanenvoimakkuus, int taajuus) {
-        super(toiminta, aanenvoimakkuus, taajuus);
-    }
-    
     public RadioKannettava() {
 
+    }
+    
+    public RadioKannettava(int toiminta, int aanenvoimakkuus, int taajuus) {
+        super(toiminta, aanenvoimakkuus, taajuus);
     }
     
     public static void main(String args[]) {
@@ -32,5 +32,16 @@ public class RadioKannettava extends Radio {
         amyri.asetaTaajuus(25999);
         
         System.out.println(amyri.mikaTaajuus());
+        System.out.println(amyri.mikaVoimakkuus());
+        System.out.println(amyri.onkoPaalla());
+        
+        amyri.asetaRadionTila(0);
+        amyri.asetaAanenvoimakkuus(0);
+        amyri.asetaTaajuus(2000);
+        System.out.println("");
+        
+        System.out.println(amyri.mikaTaajuus());
+        System.out.println(amyri.mikaVoimakkuus());
+        System.out.println(amyri.onkoPaalla());
     }
 }

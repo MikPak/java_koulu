@@ -39,7 +39,7 @@ public class Radio {
     }
     
     public void asetaRadionTila(int toiminta) {
-        if(toiminta != 0 || toiminta != 1) {
+        if(toiminta < 0 || toiminta > 1) {
             System.out.println("1 = Päällä, 0 = Pois");
         } else {
             this.toiminta = toiminta;
@@ -62,8 +62,8 @@ public class Radio {
         }
     }
     
-    public int mikaVoimakkuus() {
-        return aanenvoimakkuus;
+    public String mikaVoimakkuus() {
+        return "Äänenvoimakkuus: " + aanenvoimakkuus;
     }
     
     public String mikaTaajuus() {
@@ -71,7 +71,7 @@ public class Radio {
     }
     
     public String onkoPaalla() {
-        if(this.toiminta = 1) {
+        if(this.toiminta == 1) {
             return "Toiminta: " + this.toiminta + " = päällä";
         } else {
             return "Toiminta: " + this.toiminta + " = ei päällä";
