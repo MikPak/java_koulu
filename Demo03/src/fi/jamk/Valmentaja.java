@@ -61,7 +61,4 @@ public class Valmentaja {
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
-    
-    
-    
-    
+}
