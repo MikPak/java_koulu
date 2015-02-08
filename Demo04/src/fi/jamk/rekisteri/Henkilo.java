@@ -30,9 +30,9 @@ Pvm: 03.02.2015
 
 package fi.jamk.rekisteri;
 
-public class Henkilo {
+public class Henkilo implements Comparable {
     private String etunimi, sukunimi, sotu;
-
+    
     public Henkilo(String etunimi, String sukunimi, String sotu) {
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;
@@ -66,6 +66,18 @@ public class Henkilo {
     public String getTiedot() {
         return(this.etunimi + " " + this.sukunimi + " " + this.sotu);
     }
+    
+    // metodi määrittelee Henkilo-luokan oliot järjestettäväksi 
+    // - ensisijaisesti sukunimi-ominaisuuden perusteella (String)
+    // - toisisijaisesti etunimi-ominaisuuden perusteella (String)
+    public int compareTo(Object seuraava) {
+        String bSukunimi = ((Henkilo)seuraava).getSukunimi();
+        String bEtunimi = ((Henkilo)seuraava).getEtunimi();
+        int sukuVert = sukunimi.compareTo(bSukunimi);
+        
+        if (sukuVert == 0) return etunimi.compareTo(bEtunimi);
+        else return sukuVert;
+  }
     
     
 }
