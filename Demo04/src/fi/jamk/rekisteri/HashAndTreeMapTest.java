@@ -61,7 +61,7 @@ public class HashAndTreeMapTest {
         // Käydään läpi TreeMap
         System.out.println("\n[TreeMap]");
         while(itr.hasNext()) {
-            System.out.println((((Henkilo)itr.next())).getTiedot());
+            System.out.println(((Henkilo)itr.next()).getTiedot());
         }
     }
 }
