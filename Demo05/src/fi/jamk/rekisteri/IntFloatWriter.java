@@ -30,7 +30,7 @@ public class IntFloatWriter {
         
         // Loopataan käyttäjältä syötettä niin kauan kunnes sisältö on tyhjä
         do {
-            System.out.println("Anna merkkijono (lopetus: -q): ");
+            System.out.println("Anna luku: ");
             syote = scanner.nextLine();
             
             try {
