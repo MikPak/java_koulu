@@ -1,4 +1,7 @@
 asd
 esd
+<<<<<<< HEAD
 asdf
 trsgfh
+=======
+>>>>>>> origin/master

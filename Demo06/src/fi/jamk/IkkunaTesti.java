@@ -20,6 +20,7 @@ public class IkkunaTesti extends JFrame {
         super("IkkunaTesti");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(600,400);
+        setResizable(false);
     }
     
     public static void main(String args[]) {

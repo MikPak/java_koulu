@@ -38,7 +38,11 @@ import java.util.TreeSet;
 public class TreeSetTesti {
     public static void main(String args[]) {
         // Luodaan TreeSet-tietorakenne, joka sisältää olioita.
+<<<<<<< HEAD
         Set<Henkilo> henkilot = new java.util.TreeSet<Henkilo>();
+=======
+        Set<Object> henkilot = new java.util.TreeSet<Object>();
+>>>>>>> origin/master
         
         // Lisätään olioita tietorakenteeseen
         for(int i = 1; i < 6; i++) {

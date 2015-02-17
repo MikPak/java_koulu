@@ -37,9 +37,12 @@ public class FileRead {
                 rivi = din.readLine();
             }
             
+<<<<<<< HEAD
             din.close();
             fin.close();
             
+=======
+>>>>>>> origin/master
         } catch(EOFException e) {
             System.out.println("Tiedoston lukeminen päättyi.");
         } catch(FileNotFoundException e) {
