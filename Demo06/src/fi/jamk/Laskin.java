@@ -27,7 +27,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JButton;
@@ -36,7 +35,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class Laskin extends JFrame implements ActionListener {
+public class Laskin extends JFrame {
     private GridBagLayout layout = new GridBagLayout();
     private JLabel naytto = new JLabel("0");
     Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
