@@ -19,7 +19,7 @@ Tekijä: Mikko Pakkanen
 Pvm: 03.02.2015
 **/
 
-package fi.jamk.rekisteri;
+package fi.jamk;
 
 public class RekisteriTesti {
     public static void main(String args[]) {
@@ -43,7 +43,7 @@ public class RekisteriTesti {
         
         System.out.println("Rekisteri sisältö: ");
         for(int i = 0; i < kaverit.getHenkilomaara(); i++) {
-            h = kaverit.gethHenkilo(i);
+            h = kaverit.getHenkilo(i);
             System.out.println(h.getTiedot());
         }
         
