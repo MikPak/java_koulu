@@ -30,13 +30,26 @@ Pvm: 03.02.2015
 
 package fi.jamk;
 
+import java.awt.Image;
+import java.awt.MediaTracker;
+
 public class Henkilo implements Comparable {
     private String etunimi, sukunimi, sotu;
+    private Image kuva;
     
     public Henkilo(String etunimi, String sukunimi, String sotu) {
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;
         this.sotu = sotu;
+        this.kuva = null;
+    }
+
+    public Image getKuva() {
+        return kuva;
+    }
+
+    public void setKuva(Image kuva) {
+        this.kuva = kuva;
     }
 
     public String getEtunimi() {

@@ -31,9 +31,12 @@ package fi.jamk;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.MediaTracker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -46,7 +49,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-public class HenkiloRekisteriGUI extends JFrame {
+public class HenkiloRekisteriGUI extends JFrame implements ActionListener {
     private GridBagConstraints lastConstraints = null;
     private GridBagConstraints middleConstraints = null;
     private GridBagConstraints labelConstraints = null;
@@ -55,18 +58,27 @@ public class HenkiloRekisteriGUI extends JFrame {
     private JTextField etunimi = new JTextField();
     private JTextField sukunimi = new JTextField();
     private JTextField sotu = new JTextField();
+    private JFrame f = new JFrame("Henkilörekisteri");
+    private JPanel form = new JPanel();
+    private JPanel photo = new JPanel();
+    private Image kuva;
+    private MediaTracker mt;
+    
     private int buttonClicks = 1;
     private ArrayList<Henkilo> hessut_lista = new ArrayList<Henkilo>();
-    
+
     public HenkiloRekisteriGUI() {
         // Lisätään henkilöitä rekisteriin
-        Henkilo hessu = new Henkilo("Hessu", "Hopo", "313"); 
-        hessut.addHenkilo(hessu);
+        Henkilo hessu = new Henkilo("Hessu", "Hopo", "313");
+        loadImages(hessu, 1); // Asetetaan kuva
+        hessut.addHenkilo(hessu); // Lisätään rekisteriin
         
         hessu = new Henkilo("Aku", "Ankka", "123");
+        loadImages(hessu, 2);
         hessut.addHenkilo(hessu);
         
         hessu = new Henkilo("Mikki", "Hiiri", "777");
+        loadImages(hessu, 3);
         hessut.addHenkilo(hessu);
         
         // Määritellään rajoitteet komponenteille
@@ -89,14 +101,15 @@ public class HenkiloRekisteriGUI extends JFrame {
         labelConstraints.fill = GridBagConstraints.NONE;
         
         // Luodaan JFrame sekä JPanel sekä asetetaan panelin sijainti ikkunan yläosaan
-        JFrame f = new JFrame("Henkilörekisteri");
-        JPanel form = new JPanel();
         f.getContentPane().setLayout(new BorderLayout());
         f.getContentPane().add(form, BorderLayout.NORTH);
+        f.getContentPane().add(photo, BorderLayout.CENTER);
         
         // Paneeli käyttää GridBagLayout-manageria
         form.setLayout(new GridBagLayout());
         form.setBorder(new EmptyBorder(10, 10, 10, 10)); // Marginaali reunoista 
+        photo.setLayout(new GridBagLayout());
+        //photo.setBorder(new EmptyBorder(10,10,10,10));
         
         etunimi.setText(hessut.getHenkilo(0).getEtunimi());
         sukunimi.setText(hessut.getHenkilo(0).getSukunimi());
@@ -116,10 +129,10 @@ public class HenkiloRekisteriGUI extends JFrame {
         this.addButton(new JButton("Seuraava"), form);
         
         hessut_lista = hessut.toArrayList();
-        
+
         // Määreitä pääikkunalle
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(400, 150);
+        f.setSize(400, 450);
         f.setVisible(true);
     }
     
@@ -145,43 +158,24 @@ public class HenkiloRekisteriGUI extends JFrame {
     
     private void addButton(Component c, Container parent) {
         JButton b = (JButton)c;
-        b.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JButton pressed = (JButton) e.getSource();
-                
-                // Määritellään mitä tapahtuu kun painellaan nappeja
-                if(pressed.getText().contains("Seuraava") && buttonClicks < hessut.getHenkilomaara()) {
-                    Iterator<Henkilo> it = hessut_lista.listIterator(buttonClicks);
-                    if(it.hasNext()) {
-                       Henkilo hessu = it.next();
-                       etunimi.setText(hessu.getEtunimi());
-                       sukunimi.setText(hessu.getSukunimi());
-                       sotu.setText(hessu.getSotu());
-                    }
-                    buttonClicks++;
-                    System.out.println(buttonClicks);
-                } else if(pressed.getText().contains("Edellinen") && buttonClicks > 1) {
-                    Iterator<Henkilo> it = hessut_lista.listIterator(buttonClicks-2);
-                    if(it.hasNext()) {
-                       Henkilo hessu = it.next();
-                       etunimi.setText(hessu.getEtunimi());
-                       sukunimi.setText(hessu.getSukunimi());
-                       sotu.setText(hessu.getSotu());
-                    }
-                    buttonClicks--;
-                    System.out.println(buttonClicks);
-                }
-            }
-        });
-        
+        b.addActionListener(this);
+            
         GridBagLayout gbl = (GridBagLayout) parent.getLayout();
         gbl.setConstraints(c, labelConstraints);
         parent.add(c);
     }
     
-    private void updateJTextField(JTextField f, String s) {
+    private void loadImages(Henkilo h, int kuvanro) {
+        kuva = getToolkit().createImage("kuva"+kuvanro+".jpg");
+        mt = new MediaTracker(this);
+        mt.addImage(kuva, 0);
         
+        try {
+            mt.waitForAll();
+        } catch (Exception e) {
+        }
+        
+        h.setKuva(kuva);
     }
     
     public static void main(String args[]) {
@@ -193,4 +187,36 @@ public class HenkiloRekisteriGUI extends JFrame {
         }
         new HenkiloRekisteriGUI();
     }
-}
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+                JButton pressed = (JButton) e.getSource();
+                
+                // Määritellään mitä tapahtuu kun painellaan nappeja
+                if(pressed.getText().contains("Seuraava") && buttonClicks < hessut.getHenkilomaara()) {
+                    Iterator<Henkilo> it = hessut_lista.listIterator(buttonClicks);
+                    if(it.hasNext()) {
+                       Henkilo hessu = it.next();
+                       etunimi.setText(hessu.getEtunimi());
+                       sukunimi.setText(hessu.getSukunimi());
+                       sotu.setText(hessu.getSotu());
+                       Graphics g = photo.getGraphics();
+                       g.drawImage(hessu.getKuva(), 20, 10, this);
+                    }
+                    buttonClicks++;
+                    System.out.println(buttonClicks);
+                } else if(pressed.getText().contains("Edellinen") && buttonClicks > 1) {
+                    Iterator<Henkilo> it = hessut_lista.listIterator(buttonClicks-2);
+                    if(it.hasNext()) {
+                       Henkilo hessu = it.next();
+                       etunimi.setText(hessu.getEtunimi());
+                       sukunimi.setText(hessu.getSukunimi());
+                       sotu.setText(hessu.getSotu());
+                       Graphics g = photo.getGraphics();
+                       g.drawImage(hessu.getKuva(), 20, 10, this);
+                    }
+                    buttonClicks--;
+                    System.out.println(buttonClicks);
+                }
+            }
+    }

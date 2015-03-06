@@ -72,7 +72,4 @@ public class Rekisteri {
         // Sotua vastaavaa henkiloa ei loydy
         return null;
     }
-    
-    
-    
 }
